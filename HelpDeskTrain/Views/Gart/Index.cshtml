@@ -1,0 +1,86 @@
+﻿@model HelpDeskTrain.Models.Gart
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Автоматизація оновлення систем "Гарт" та їх БД</h2>
+
+
+<div>
+        @using (Html.BeginForm("Index", "Gart", FormMethod.Post))
+    {
+          
+            
+<fieldset style="width:650px">
+       <br>
+    <legend>Оберіть параметри</legend>
+
+    <div style="overflow:hidden">
+
+    <div style="width:1000%">
+        <div style="float:left;margin-right:10px"><fieldset style="width:200px">
+        <br>
+        <legend>Класи для оновлення</legend>
+            @for (int i=0;i<Model.Kabinets.Count();i++)
+             {
+                @Html.Label(Model.Kabinets[i].KabNUm)
+                @Html.CheckBoxFor(s=>Model.Kabinets[i].check) <br>
+                @Html.HiddenFor(s=>Model.Kabinets[i].KabNUm)
+             }
+
+        </fieldset></div>
+        <div style="float:left;margin-right:10px"><fieldset style="width:150px">
+        <br>
+        <legend>Гарти</legend>
+    @Html.CheckBox("ASO",false)
+    @Html.Label("ASO")
+        <br>
+    @Html.CheckBox("tele",false)
+    @Html.Label("tele")
+        <br>
+    @Html.CheckBox("Gart2",false)
+    @Html.Label("Gart2")
+        <br>
+    @Html.CheckBox("cordon",false)
+    @Html.Label("cordon")
+        <br>
+    @Html.CheckBox("viddilps",false)
+    @Html.Label("viddilps")
+
+        </fieldset></div>
+        <div style="float:left"><fieldset style="width:150px">
+        <br>
+        <legend>БД для ГАРТ 3</legend>
+
+           @Html.DropDownList("Gart3Base",new SelectList(ViewBag.Gart3Folders))
+          
+         </fieldset></div>
+
+    </div>
+
+        <fieldset style="width:150px">
+        <legend>Статус оновлення</legend>
+
+         @Html.LabelFor(s=>Model.timer)
+         @Html.EditorFor(s => Model.timer,60)
+             <br>
+          @Html.CheckBox("Status",false)
+          @Html.Label("Status")
+         </fieldset>
+
+
+</div>
+
+    <br>
+
+         
+
+
+
+    <input type="submit" value="Оновити" />
+</fieldset>
+   
+        }
+
+</div>

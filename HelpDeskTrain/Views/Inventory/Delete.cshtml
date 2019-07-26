@@ -1,0 +1,81 @@
+﻿@model HelpDeskTrain.Models.Inventory
+
+@{
+    ViewBag.Title = "Видалення запису";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви впевнені що бажаєте видалити запис?</h3>
+<fieldset>
+   
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Characteristic)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Characteristic)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Appointment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Appointment)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateRelease)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateRelease)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.InvNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.InvNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Count)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Count)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comment)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Units)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Units)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Видалити" /> |
+        @Html.ActionLink("Назад до списку", "Index")
+    </p>
+}

@@ -1,0 +1,50 @@
+﻿@model HelpDeskTrain.Models.NadpsuOrgState
+
+@{
+    ViewBag.Title = "Деталі запису";
+}
+
+<h2>Деталі запису</h2>
+
+<fieldset>
+    <legend>NadpsuOrgState</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GroupNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GroupNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DepartmentName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DepartmentName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortDepartmentName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortDepartmentName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PersonCount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PersonCount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GroupCourse)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GroupCourse)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Редагувати", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Назад до списку", "Index")
+</p>

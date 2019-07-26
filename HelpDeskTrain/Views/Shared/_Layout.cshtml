@@ -1,0 +1,192 @@
+﻿ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/datepicker")
+
+<script src="Scripts/jquery-1.12.4.min.js"></script>
+ 
+</head>
+<body>
+    <script>
+        $(function () {
+            alert('jQuery подключен и отлично работает!');
+        });
+		</script>
+    <!-- В зависимости от роли пользователя устанавливаем определенное меню -->
+    @if (ViewContext.HttpContext.User.IsInRole("Администратор") || ViewContext.HttpContext.User.IsInRole("SuperAdmin"))
+    {
+        <h2>Меню адмінистратора: ви увійшли як superadmin</h2>
+            <div class="menu">
+                <ul>
+                    <li><a class="hide">Журнали</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої журнали", "Index", "Journal")</li>
+                        </ul>
+                    </li>
+                    <li><a class="hide">Довідники</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Кафедри/Відділи", "Departments", "Service")</li>
+                            <li>@Html.ActionLink("Класи/Кабінети", "Activ", "Service")</li>
+                            <li>@Html.ActionLink("Несправності", "Categories", "Service")</li>
+                            <li>@Html.ActionLink("Групи", "Index", "NadpsuOrgState")</li>
+                            <li>@Html.ActionLink("Курсанти", "Index", "kadet")</li>
+                            <li>@Html.ActionLink("Список занять", "Index", "LessonList")</li>
+                            <li>@Html.ActionLink("Типи занять", "Index", "LessonType")</li>
+                            <li>@Html.ActionLink("Дисципліни", "Index", "Discipline")</li>
+                             
+                          @if(Convert.ToBoolean(Session["InvAccess"])==true)
+                              {<li>@Html.ActionLink("Інвентар", "Index", "Inventory")</li>}
+                        </ul>
+                    </li>
+                    <li><a class="hide">Заявки</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої заявки", "Index", "Request")</li>
+                            <li>@Html.ActionLink("Всі заявки", "RequestList", "Request")</li>
+                            <li>@Html.ActionLink("Нова", "Create", "Request")</li>
+                        </ul>
+                    </li>
+                    <li><a class="hide">Користувачі</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Додати", "Create", "User")</li>
+                            <li>@Html.ActionLink("Перегляд", "Index", "User")</li>
+                        </ul>
+                    </li>
+                    <li><a class="hide">Сервіс</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Гарти", "Index", "Gart")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Вийти", "LogOff", "Account")</li>
+                </ul>
+            </div> 
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("Модератор"))
+    { 
+        <h2>Меню диспетчера</h2>
+             <div class="menu">
+                <ul>
+                    <li><a class="hide">Журнали</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої журнали", "Index", "Journal")</li>
+                        </ul>
+                    </li>
+                    <li><a class="hide">Довідники</a>
+                        <ul class="submenu">
+                             @if(Convert.ToBoolean(Session["InvAccess"])==true)
+                     {
+                      <li>@Html.ActionLink("Інвентар", "Index", "Inventory")</li>
+                     }
+                           <li>@Html.ActionLink("Групи", "Index", "NadpsuOrgState")</li>
+                            <li>@Html.ActionLink("Курсанти", "Index", "kadet")</li>
+                            <li>@Html.ActionLink("Список занять", "Index", "LessonList")</li>
+                            <li>@Html.ActionLink("Типи занять", "Index", "LessonType")</li>
+                            <li>@Html.ActionLink("Дисципліни", "Index", "Discipline")</li>
+                        </ul>
+                    </li>
+                     
+                    
+
+                    <li><a class="hide">Заявки</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої заявки", "Index", "Request")</li>
+                            <li>@Html.ActionLink("Розподілення", "Distribute", "Request")</li>
+                            <li>@Html.ActionLink("Нова", "Create", "Request")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Користувачі", "Index", "User")</li>
+                     <li><a class="hide">Сервіс</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Гарти", "Index", "Gart")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Вийти", "LogOff", "Account")</li>
+                </ul>
+         </div>
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("Исполнитель"))
+    {
+        <h2>Меню виконавця</h2>
+             <div class="menu">
+                <ul>
+                    <li><a class="hide">Журнали</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої журнали", "Index", "Journal")</li>
+                        </ul>
+                    </li>
+                     <li><a class="hide">Довідники</a>
+                        <ul class="submenu">
+                             @if(Convert.ToBoolean(Session["InvAccess"])==true)
+                     {
+                      <li>@Html.ActionLink("Інвентар", "Index", "Inventory")</li>
+                     }
+                          <li>@Html.ActionLink("Групи", "Index", "NadpsuOrgState")</li>
+                            <li>@Html.ActionLink("Курсанти", "Index", "kadet")</li>
+                            <li>@Html.ActionLink("Список занять", "Index", "LessonList")</li>
+                            <li>@Html.ActionLink("Типи занять", "Index", "LessonType")</li>
+                            <li>@Html.ActionLink("Дисципліни", "Index", "Discipline")</li>
+                        </ul>
+                    </li>
+                    <li><a class="hide">Заявки</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої заявки", "Index", "Request")</li>
+                            <li>@Html.ActionLink("змінити статус", "ChangeStatus", "Request")</li>
+                            <li>@Html.ActionLink("Нова", "Create", "Request")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Користувачі", "Index", "User")</li>
+                     <li><a class="hide">Сервіс</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Гарти", "Index", "Gart")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Вийти", "LogOff", "Account")</li>
+                </ul>
+         </div>
+    }
+    else if (ViewContext.HttpContext.User.IsInRole("Пользователь"))
+    {
+        <h2>Приветствую, @ViewContext.HttpContext.User.Identity.Name</h2>
+            <div class="menu">
+                <ul>
+                    <li><a class="hide">Журнали</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Мої журнали", "Index", "Journal")</li>
+                        </ul>
+                    </li>
+                     <li><a class="hide">Довідники</a>
+                        <ul class="submenu">
+                             @if(Convert.ToBoolean(Session["InvAccess"])==true)
+                     {
+                      <li>@Html.ActionLink("Інвентар", "Index", "Inventory")</li>
+                     }
+                           <li>@Html.ActionLink("Групи", "Index", "NadpsuOrgState")</li>
+                            <li>@Html.ActionLink("Курсанти", "Index", "kadet")</li>
+                            <li>@Html.ActionLink("Список занять", "Index", "LessonList")</li>
+                            <li>@Html.ActionLink("Типи занять", "Index", "LessonType")</li>
+                            <li>@Html.ActionLink("Дисципліни", "Index", "Discipline")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Подати заявку", "Create", "Request")</li>
+                    <li>@Html.ActionLink("Мої заявки", "Index", "Request")</li>
+                     <li><a class="hide">Сервіс</a>
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Гарти", "Index", "Gart")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Вийти", "LogOff", "Account")</li>
+                </ul>
+         </div>
+    }
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    
+</body>
+</html>

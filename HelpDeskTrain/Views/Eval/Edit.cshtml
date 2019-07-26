@@ -1,0 +1,73 @@
+﻿@model List<HelpDeskTrain.Models.Eval>
+@{
+    ViewBag.Title = "Інформація про курсанта";
+   
+}
+
+<p>Рекомендовані позначення:<br>
+<span style="font-weight:600">Н</span> - відсутній, <span style="font-weight:600">ХВ</span> - хворий, <span style="font-weight:600">ВД</span> - відрядження, <span style="font-weight:600">ВП</span> - відпустка </p>
+@using (Html.BeginForm("Edit","Eval",FormMethod.Post))
+{
+    Model.OrderBy(x => x.LessonLists.ThemeNumber).ThenBy(x=>x.LessonLists.LessonNumber);
+    
+    
+    <table border="1">
+          <tr>  
+          <td style="font-weight:800">П.І.Б</td>
+           
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            if (Model[i].LessonLists.Required)
+            {
+            <td style="background-color:#8fed69;font-weight:800">
+                    @Html.DisplayFor(model => model[i].LessonLists.LessonType.ShortName)<br>
+                   @* @Html.DisplayFor(model => model[i].LessonLists.ThemeNumber)/@Html.DisplayFor(model => model[i].LessonLists.LessonNumber)*@
+                </td>
+            }
+            else if (Model[i].LessonLists.RequiredField)
+            {
+                <td style="background-color:#f79090;font-weight:800">
+                    @Html.DisplayFor(model => model[i].LessonLists.LessonType.ShortName)<br>
+                    @Html.DisplayFor(model => model[i].LessonLists.ThemeNumber)/@Html.DisplayFor(model => model[i].LessonLists.LessonNumber)
+                </td>
+            }
+            else
+            {
+             <td style="font-weight:800">
+                    @Html.DisplayFor(model => model[i].LessonLists.LessonType.ShortName)<br>
+                    @Html.DisplayFor(model => model[i].LessonLists.ThemeNumber)/@Html.DisplayFor(model => model[i].LessonLists.LessonNumber)
+                </td>
+            }
+                
+        }
+         
+            </tr>
+        @for (int i = 0; i < 1; i++)
+        {       
+                <td>@Html.DisplayFor(model => model[i].Kadets.Pib)</td>
+        }
+
+
+         @for (int i = 0; i < Model.Count; i++)
+        {
+
+                <td>@Html.TextBoxFor(model => model[i].Value, new {style = "width:30px"})
+                    @Html.HiddenFor(model => model[i].Id)
+                </td>       
+               
+               
+        }
+
+    </table>
+<p>
+            <input type="submit" value="Зберегти" />
+</p>
+    
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

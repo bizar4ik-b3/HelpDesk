@@ -1,0 +1,38 @@
+﻿@model HelpDeskTrain.Models.LessonType
+
+@{
+    ViewBag.Title = "Видалення запису";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви впевнені що бажаєте видалити запис?</h3>
+<fieldset>
+   
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comment)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Видалити" /> |
+        @Html.ActionLink("Назад до списку", "Index")
+    </p>
+}

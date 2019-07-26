@@ -1,0 +1,67 @@
+﻿@model HelpDeskTrain.Models.Kadet
+
+@{
+    ViewBag.Title = "Додавання запису";
+}
+
+<h2>Додати курсанта</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Данні про курсанта</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pib)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pib)
+            @Html.ValidationMessageFor(model => model.Pib)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Group)
+        </div>
+        <div class="editor-field">
+             @Html.DropDownListFor(model=>model.GroupId,ViewBag.Groups as SelectList)
+            @Html.ValidationMessageFor(model => model.GroupId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rank)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.RankId,ViewBag.Ranks as SelectList)
+            @Html.ValidationMessageFor(model => model.Rank)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Telephone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telephone)
+            @Html.ValidationMessageFor(model => model.Telephone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comment)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <p>
+            <input type="submit" value="Зберегти" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("До списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

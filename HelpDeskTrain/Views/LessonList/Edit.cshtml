@@ -1,0 +1,102 @@
+﻿@model HelpDeskTrain.Models.LessonList
+
+@{
+    ViewBag.Title = "Редагування запису";
+}
+
+<h2>Редагувати заняття</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend></legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThemeNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ThemeNumber)
+            @Html.ValidationMessageFor(model => model.ThemeNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LessonNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LessonNumber)
+            @Html.ValidationMessageFor(model => model.LessonNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Hours)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Hours)
+            @Html.ValidationMessageFor(model => model.Hours)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LessonDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LessonDate)
+            @Html.ValidationMessageFor(model => model.LessonDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LessonType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.LessonTypeId, ViewBag.LessonTypes as SelectList)
+            @Html.ValidationMessageFor(model => model.LessonTypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Discipline.Name)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.DisciplineId, ViewBag.Disciplines as SelectList)
+            @Html.ValidationMessageFor(model => model.DisciplineId)
+        </div>
+
+            <div class="editor-label">
+            @Html.LabelFor(model => model.Required)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Required)
+            @Html.ValidationMessageFor(model => model.Required)
+        </div>      
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RequiredField)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RequiredField)
+            @Html.ValidationMessageFor(model => model.RequiredField)
+        </div>
+
+        
+        <p>
+            <input type="submit" value="Зберегти" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

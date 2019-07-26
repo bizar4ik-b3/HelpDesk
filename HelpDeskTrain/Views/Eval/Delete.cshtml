@@ -1,0 +1,46 @@
+﻿@model HelpDeskTrain.Models.Eval
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Eval</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.KadetId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KadetId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LessonListId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LessonListId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.JournalId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JournalId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Value)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Value)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

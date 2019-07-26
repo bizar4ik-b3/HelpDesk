@@ -1,0 +1,180 @@
+﻿@model HelpDeskTrain.Models.User
+
+@{
+    ViewBag.Title = "Створення користувачів";
+}
+
+<h2>Редагування данних користувача</h2>
+
+@using (Html.BeginForm("Edit","User",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Карточка пользователя</legend>
+
+        <table  style="border:dotted 2px;" >
+    <tr >
+        <td style="width:350px;">
+            <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+            <div class="editor-label">
+            @Html.LabelFor(model => model.FioShort)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FioShort)
+            @Html.ValidationMessageFor(model => model.FioShort)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Login)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Position)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Position)
+            @Html.ValidationMessageFor(model => model.Position)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentId)
+        </div>
+        <div class="editor-field">
+             @Html.DropDownListFor(model => model.DepartmentId, ViewBag.Departments as SelectList)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoleId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.RoleId, ViewBag.Roles as SelectList)
+            @Html.ValidationMessageFor(model => model.RoleId)
+        </div>
+            <div class="editor-label">
+            @Html.LabelFor(model => model.RankId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.RankId,ViewBag.Ranks as SelectList)
+            @Html.ValidationMessageFor(model => model.Rank)
+        </div>
+        </td>
+        <td style="width:350px;">
+            
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PersonCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PersonCode)
+            @Html.ValidationMessageFor(model => model.PersonCode)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model=>model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model=>model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model=>model.OrderNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model=>model.OrderNumber)
+            @Html.ValidationMessageFor(model => model.OrderNumber)
+        </div>
+        <div class="editor-label">
+
+            @Html.LabelFor(model => model.WorkStartAt)
+            
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WorkStartAt,new { value = Model.WorkStartAt.ToShortDateString() })
+            
+            @Html.ValidationMessageFor(model => model.WorkStartAt)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model=>model.OrderPosition)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model=>model.OrderPosition)
+            @Html.ValidationMessageFor(model => model.OrderPosition)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model=>model.OrderRank)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model=>model.OrderRank)
+            @Html.ValidationMessageFor(model => model.OrderRank)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model=>model.Photo)
+        </div>
+        <div class="editor-field">
+            <input type="file" name="upload">
+            
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model=>model.PmkNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model=>model.PmkNumber)
+            @Html.ValidationMessageFor(model => model.PmkNumber)
+        </div>
+
+            
+
+        </td>
+         <td style="width:150px;">
+         @if (Model.Photo != null)
+            { 
+              <img style="width:200px;height:300px" src="/Files/@Model.Photo" alt='@Model.Photo' class="tdImage" />
+            }
+            else
+            { 
+                <img style="width:200px;height:300px" src="/Files/no-profile-img.gif" alt='noPhoto' class="tdImage" />
+            }    
+         </td>
+        <td >
+            <div class="editor-label">
+            @Html.LabelFor(model=>model.InvAccess)
+        </div>
+            <div class="editor-field">
+            @Html.CheckBoxFor(model=>model.InvAccess)
+            @Html.ValidationMessageFor(model => model.InvAccess)
+        </div>
+        </td>
+    </tr>
+            
+</table>
+
+        <p>
+            <input type="submit" value="Зберегти" />
+        </p>
+
+    </fieldset>
+    
+    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

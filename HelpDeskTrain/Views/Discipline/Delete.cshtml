@@ -1,0 +1,25 @@
+﻿@model HelpDeskTrain.Models.Discipline
+
+@{
+    ViewBag.Title = "Видалення запису";
+}
+
+<h2>Видалення</h2>
+
+<h3>Вы впевнені що бажаєте видалити запис?</h3>
+<fieldset>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Видалити" /> |
+        @Html.ActionLink("Назад до списку", "Index")
+    </p>
+}

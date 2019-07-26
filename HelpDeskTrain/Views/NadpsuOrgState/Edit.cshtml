@@ -1,0 +1,82 @@
+﻿@model HelpDeskTrain.Models.NadpsuOrgState
+
+@{
+    ViewBag.Title = "Редагування запису";
+}
+
+<h2>Редагування запису</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Орг штат НАДПСУ</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GroupNumber)
+            @Html.ValidationMessageFor(model => model.GroupNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Specialty)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Specialty)
+            @Html.ValidationMessageFor(model => model.Specialty)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepartmentName)
+            @Html.ValidationMessageFor(model => model.DepartmentName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShortDepartmentName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortDepartmentName)
+            @Html.ValidationMessageFor(model => model.ShortDepartmentName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PersonCount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PersonCount)
+            @Html.ValidationMessageFor(model => model.PersonCount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupCourse)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GroupCourse)
+            @Html.ValidationMessageFor(model => model.GroupCourse)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SampoClass)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SampoClass)
+            @Html.ValidationMessageFor(model => model.SampoClass)
+        </div>
+        <p>
+            <input type="submit" value="Зберегти" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

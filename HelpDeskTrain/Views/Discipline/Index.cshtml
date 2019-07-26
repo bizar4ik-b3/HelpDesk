@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HelpDeskTrain.Models.Discipline>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список дисциплін</h2>
+
+<p>
+    @Html.ActionLink("Додати запис", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Видалити", "Delete", new { id=item.Id })
+            @Html.ActionLink("Редагувати", "Edit", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,300 @@
+﻿@model IEnumerable<HelpDeskTrain.Models.Eval>
+
+@{
+    ViewBag.Title = "Журнал групи";
+}
+
+<h2>Журнал групи : @ViewBag.Journal</h2> 
+<div>
+    <form method="post" action="">
+<fieldset style="width:250px">
+    <legend>Параметри</legend>
+    @Html.CheckBox("allowEdit",Convert.ToBoolean(Session["allowedEdit"]))
+    @Html.Label("Дозволити редагування журналу")
+    @Html.CheckBox("showModule",Convert.ToBoolean(Session["moduleMath"]))
+    @Html.Label("Показати підсумки модуля")
+    @Html.Hidden("journalId")<br>
+    <input type="submit" value="Прийняти" />
+</fieldset>
+   
+    </form></div>
+<p>Рекомендовані позначення:<br>
+<span style="font-weight:600">Н</span> - відсутній, <span style="font-weight:600">ХВ</span> - хворий, <span style="font-weight:600">ВД</span> - відрядження, <span style="font-weight:600">ВП</span> - відпустка </p>
+
+    @using (Html.BeginForm("Save", "Eval", FormMethod.Post))
+    {
+      
+  <table border="1">
+
+  <tr>  
+      <td style="font-weight:800">№
+          @Html.Hidden("journalId") 
+      </td>
+@*      <td>Звання</td>*@
+      <td style="font-weight:800">П.І.Б</td>
+
+    @foreach (var leson in Model.GroupBy(x => x.LessonListId, (key, group) => group.First()).OrderBy(el => el.LessonLists.ThemeNumber).ThenBy(el => el.LessonLists.LessonNumber))
+    {
+        if (leson.LessonLists.Required && Convert.ToBoolean(Session["moduleMath"]))
+        {
+        <td class="module" style="font-weight:800">
+           Avg
+        </td>   
+         <td class="module" style="font-weight:800">
+           0.8
+        </td> 
+         <td class="module" style="font-weight:800">
+           0.2
+        </td> 
+         <td class="module" style="font-weight:800">
+            Заг.
+        </td> 
+         <td class="module" style="font-weight:800">
+            Модуль
+        </td>  
+        }
+        if (leson.LessonLists.Required)
+        {
+            if (Convert.ToBoolean(Session["moduleMath"]))
+            {
+         <td style="background-color:#8fed69;font-weight:800">@Html.DisplayFor(atata => leson.LessonLists.Name)<br>    
+         </td>
+            }
+        }
+        else if (leson.LessonLists.RequiredField)
+        {
+                 <td style="background-color:#f79090;font-weight:800" >  
+                @Html.DisplayFor(atata => leson.LessonLists.LessonType.ShortName)<br>
+                @Html.DisplayFor(atata => leson.LessonLists.ThemeNumber)/@Html.DisplayFor(atata => leson.LessonLists.LessonNumber)
+            </td>
+        }
+        else
+        {
+       <td style="font-weight:800">
+            @Html.DisplayFor(atata => leson.LessonLists.LessonType.ShortName)<br>
+            @Html.DisplayFor(atata => leson.LessonLists.ThemeNumber)/@Html.DisplayFor(atata => leson.LessonLists.LessonNumber)
+       </td>
+        }
+    }
+    
+      <td></td>
+      </tr>
+
+@{
+    int counter = 0;
+    int listNumber = 0;
+    double summ = 0;
+    byte RequiredCount = 0;
+    //int min= ViewBag.Module[0];
+
+    foreach (var student in Model.GroupBy(x => x.KadetId, (key, group) => group.First()).OrderBy(x => x.Kadets.Pib))
+    {
+        summ = 0;
+        counter = 0;
+        listNumber++;
+        <tr></tr>
+        <td> @listNumber</td>
+    @*<td> @Html.DisplayFor(modelItem => student.Kadets.RankId)</td>*@
+        <td> 
+            <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Редагувати запис" 
+               href="/Eval/Edit/@student.Kadets.Id?j=@student.JournalId">
+            @Html.DisplayFor(modelItem => student.Kadets.Pib)
+                </a>
+        </td>
+
+        //var value = Model.Where(el => el.KadetId == student.KadetId).OrderBy(el => el.LessonLists.ThemeNumber).ThenBy(el => el.LessonLists.LessonNumber).ToList();
+        //for (int i = 0; i < value.Count; i++)
+        //{
+
+        //}
+        foreach (var item in Model.Where(el => el.KadetId == student.KadetId).OrderBy(el => el.LessonLists.ThemeNumber).ThenBy(el => el.LessonLists.LessonNumber))
+        {
+            if ((item.Value != null) && (item.LessonLists.Required != true))
+            {
+                try
+                {
+                    summ += Convert.ToDouble(item.Value);
+                    counter++;
+                }
+                catch (Exception)
+                {
+
+
+                }
+
+            }
+
+            if ((item.LessonLists.RequiredField) && (item.Value == null))
+            {
+                RequiredCount += 1;
+            }
+            else if ((item.LessonLists.RequiredField) && (item.Value != null))
+            {
+                try
+                {
+                    Convert.ToDouble(item.Value);
+
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+
+            ////////////////
+            if (item.LessonLists.Required)
+            {
+                double avg = 0;
+                double val = 0;
+                
+                try
+                {
+                    val = Convert.ToDouble(item.Value);
+                }
+                catch (Exception)
+                {
+                }
+
+                double mod = 0;
+                double val0_2 = Math.Round(val * 0.2, 2);
+                 @*Включение,отключение видимости полей модуля  *@
+                if (Convert.ToBoolean(Session["moduleMath"]))
+                {   
+                <td class="module">
+                    @if (counter > 0)
+                    {
+                        if (RequiredCount < 1)
+                        {
+                            avg = Math.Round(summ / counter, 2);
+                        }
+
+                        mod = Math.Round((avg) * 0.8 + (val * 0.2), 2);
+                        @avg   
+                    }
+                </td>   
+    
+                 <td class="module">
+                   @Math.Round((avg) * 0.8, 2)
+                </td> 
+                 <td class="module">
+                   @val0_2
+                </td> 
+                 <td class="module">
+                   @mod
+                </td> 
+                 <td class="module">
+
+                  @if (mod > 4.51)
+                  {
+                      Write("5A");
+                  }
+                  else if ((mod > 4.01))
+                  {
+                      Write("4B");
+                  }
+                  else if ((mod > 3.51))
+                  {
+                      Write("4C");
+                  }
+                  else if ((mod > 3.01))
+                  {
+                      Write("3D");
+                  }
+                  else if ((mod > 2.61))
+                  {
+                      Write("3E");
+                  }
+                  else if ((mod > 2))
+                  {
+                      Write("2FX");
+                  }
+                </td>  
+                };
+                if (item.LessonLists.Required)
+                {
+                    summ = 0;
+                    counter = 0;
+                    RequiredCount = 0;
+                }
+            }
+            @*Если занятие модуль*@
+            
+            if (item.LessonLists.Required)
+            {
+                if (Convert.ToBoolean(Session["moduleMath"]))
+                {
+                    if (Convert.ToBoolean(Session["allowedEdit"]) == true)
+                    {
+                        <td style="background-color:#8fed69" >  
+                        @Html.HiddenFor(modelItem => item.Id)
+                        @Html.TextBoxFor(modelItem => item.Value, new { style = "width:30px" })
+                        </td>   
+                    }
+                    else
+                    { 
+                         <td style="background-color:#8fed69" >  
+                        @Html.HiddenFor(modelItem => item.Id)
+                        @Html.Label(""+item.Value, new { style = "width:30px" })
+                        </td> 
+                    }
+
+                }
+            }
+             @*Если занятие обязательное*@
+            else if (item.LessonLists.RequiredField)
+            {
+                if (Convert.ToBoolean(Session["allowedEdit"]) == true)
+                {
+                  <td style="background-color:#f79090" >  
+                  @Html.HiddenFor(modelItem => item.Id)
+                  @Html.TextBoxFor(modelItem => item.Value, new { style = "width:30px" })
+                  </td> 
+                }
+                else
+                {
+                    <td style="background-color:#f79090" >  
+                  @Html.HiddenFor(modelItem => item.Id)
+                  @Html.Label(""+item.Value, new { style = "width:30px" })
+                  </td> 
+                } 
+            }
+            else
+            {
+                if (Convert.ToBoolean(Session["allowedEdit"]) == true)
+                { 
+                <td>  
+               @Html.HiddenFor(modelItem => item.Id)
+               @Html.TextBoxFor(modelItem => item.Value, new { style = "width:30px" })   
+              </td> 
+                }
+                else
+                {
+             <td>  
+               @Html.HiddenFor(modelItem => item.Id)
+               @Html.Label(""+item.Value, new { style = "width:30px" })   
+              </td> 
+                }
+            }
+            ////////////////
+        }
+        
+        <td>
+            <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Редагувати запис" 
+               href="/Eval/Edit/@student.Kadets.Id?j=@student.JournalId">
+               <img src="../../Content/pictures/document-edit.png" class="tdImage" title="Редагувати запис" />
+         </a>
+        </td>
+    }
+}
+  </table>
+       
+           if  (Convert.ToBoolean(Session["allowedEdit"]) == true)
+         {
+    <p>
+            <input type="submit" value="Зберегти" />
+    </p>
+         }
+}
+
+
+

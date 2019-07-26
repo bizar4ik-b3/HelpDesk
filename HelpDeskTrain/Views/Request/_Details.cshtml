@@ -1,0 +1,9 @@
+﻿@model HelpDeskTrain.Models.Request
+<div>
+<p><b>Детально: Заявка №  @Html.DisplayFor(m => m.Id)</b></p>
+<p>Опис: @Html.DisplayFor(m=>m.Description)</p>
+<p>Дата виконання: @Html.DisplayFor(m=>m.WorkDoneAt)</p>
+<p>Кабінет: @Html.DisplayFor(m=>m.Activ.CabNumber)</p>
+<p>Категорія: @Html.DisplayFor(m=>m.Category.Name)</p>
+<p>Коментар: @Html.DisplayFor(m=>m.Comment)</p>
+</div>

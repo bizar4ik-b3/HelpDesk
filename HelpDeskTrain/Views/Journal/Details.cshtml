@@ -1,0 +1,60 @@
+﻿@model HelpDeskTrain.Models.Journal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Journal</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Group.DepartmentName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Group.DepartmentName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+</fieldset>
+
+
+ =====================================<br>
+
+@foreach (var lesson in Model.LessonLists) 
+        {
+    
+                <td> 
+                    @Html.DisplayFor(modelItem => lesson.LessonNumber) <br>
+                </td> 
+                
+    
+            foreach(var kadet in lesson.Kadets)
+            {
+                <td> 
+                    @Html.DisplayFor(modelItem => kadet.Pib) <br>
+                </td> 
+        
+            }
+           <br>     
+    
+}   
+   
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

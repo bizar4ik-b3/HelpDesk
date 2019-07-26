@@ -1,0 +1,11 @@
+﻿@model HelpDeskTrain.Models.Lifecycle
+
+<div>
+    <p><b>Заявка № @Html.DisplayFor(m => m.Id)</b></p>
+    <p>Життевий цикл</p>
+    <p>Відкрита:  @Html.DisplayFor(m=>m.Opened)</p>
+    <p>Розподілена:  @Html.DisplayFor(m=>m.Distributed)</p>
+    <p>В процесі:  @Html.DisplayFor(m=>m.Proccesing)</p>
+    <p>На перевірці:  @Html.DisplayFor(m=>m.Checking)</p>
+    <p>Закрита:  @Html.DisplayFor(m=>m.Closed)</p>
+</div>

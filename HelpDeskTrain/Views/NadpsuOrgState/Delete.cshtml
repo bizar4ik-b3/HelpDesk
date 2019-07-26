@@ -1,0 +1,53 @@
+﻿@model HelpDeskTrain.Models.NadpsuOrgState
+
+@{
+    ViewBag.Title = "Видалення запису";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви впевнені що бажаете видалити запис?</h3>
+<fieldset>
+    <legend>Орг штат НАДПСУ</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GroupNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GroupNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DepartmentName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DepartmentName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortDepartmentName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortDepartmentName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PersonCount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PersonCount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GroupCourse)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GroupCourse)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Видалити" /> |
+        @Html.ActionLink("Назад до списку", "Index")
+    </p>
+}

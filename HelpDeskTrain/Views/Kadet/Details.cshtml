@@ -1,0 +1,43 @@
+﻿@model HelpDeskTrain.Models.Kadet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Kadet</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Pib)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Pib)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Group.DepartmentName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Group.DepartmentName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Telephone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telephone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comment)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comment)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

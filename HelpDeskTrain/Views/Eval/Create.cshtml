@@ -1,0 +1,59 @@
+﻿@model HelpDeskTrain.Models.Eval
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Eval</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KadetId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KadetId)
+            @Html.ValidationMessageFor(model => model.KadetId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LessonListId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LessonListId)
+            @Html.ValidationMessageFor(model => model.LessonListId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JournalId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JournalId)
+            @Html.ValidationMessageFor(model => model.JournalId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Value)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

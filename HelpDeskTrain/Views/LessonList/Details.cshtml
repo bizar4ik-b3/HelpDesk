@@ -1,0 +1,71 @@
+﻿@model HelpDeskTrain.Models.LessonList
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>LessonList</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThemeNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ThemeNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LessonNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LessonNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Hours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hours)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LessonDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LessonDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Required)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Required)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

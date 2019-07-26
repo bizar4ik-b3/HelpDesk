@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HelpDeskTrain.Models.Kadet>
+
+@{
+    ViewBag.Title = "Список курсантів";
+}
+
+<div><form method="post" action="/Kadet/Index">
+        <table>
+            <tr><td><p>Група : </p></td><td> @Html.DropDownList("Group",ViewBag.Groups as SelectList)</td>
+           
+            <td><input type="submit" value="Фільтр" /> </td></tr>
+        </table>
+    </form></div>
+
+<h2>Список курсантів</h2>
+
+<p>
+    @Html.ActionLink("Додати запис", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rank)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pib)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Group.GroupNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rank.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pib)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.GroupNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+           <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Видалити запис" 
+               href="/Kadet/Delete/@item.Id">
+               <img src="../../Content/pictures/delete-icon.png" class="tdImage" title="Видалити запис" />
+              <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Редагувати запис" 
+               href="/Kadet/Edit/@item.Id">
+               <img src="../../Content/pictures/document-edit.png" class="tdImage" title="Редагувати запис" />
+        </td>
+    </tr>
+}
+
+</table>

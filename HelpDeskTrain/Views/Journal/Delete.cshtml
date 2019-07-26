@@ -1,0 +1,16 @@
+﻿@model HelpDeskTrain.Models.Journal
+
+@{
+    ViewBag.Title = "Видалення журналу";
+}
+
+<h2>Видалення журналу</h2>
+
+<h3>Ви впевнені що бажаєте видалити журнал?</h3>
+
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Видалити" /> |
+        @Html.ActionLink("Назад до списку", "Index")
+    </p>
+}

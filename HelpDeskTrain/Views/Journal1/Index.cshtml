@@ -1,0 +1,48 @@
+﻿@model IEnumerable<HelpDeskTrain.Models.Journal>
+
+@{
+    ViewBag.Title = "Список журналів";
+}
+
+<h2>Список журналів</h2>
+
+<p>
+    @Html.ActionLink("Створити новий журнал", "Create")
+</p>
+<table>
+    <tr>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.Group.GroupNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.GroupNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+           @* <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Редагувати запис" 
+               href="/Journal/Edit/@item.Id">
+               <img src="../../Content/pictures/document-edit.png" class="tdImage" title="Редагувати запис" />*@
+                 <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Видалити запис" 
+               href="/Journal/Delete/@item.Id">
+               <img src="../../Content/pictures/delete-icon.png" class="tdImage" title="Видалити запис" />
+               <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Детально" 
+               href="/Eval/Details/@item.Id">
+               <img src="../../Content/pictures/info.png" class="tdImage" title="Детально" />
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,16 @@
+﻿@model HelpDeskTrain.Models.Kadet
+
+@{
+    ViewBag.Title = "Видалення запису";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви впевнені що бажаєте видалити запис?</h3>
+
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Видалити" /> |
+        @Html.ActionLink("Назад до списку", "Index")
+    </p>
+}

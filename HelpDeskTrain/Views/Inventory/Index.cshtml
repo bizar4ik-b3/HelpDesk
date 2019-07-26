@@ -1,0 +1,106 @@
+﻿@model IEnumerable<HelpDeskTrain.Models.Inventory>
+
+@{
+    ViewBag.Title = "Інвентарний довідник";
+}
+
+<h2>Інвентарний довідник</h2>
+
+<p>
+    @Html.ActionLink("Додати новий запис", "Create")
+</p>
+<table border="1" style="text-align:center; font-size:12px;">
+    <tr >
+        <th style="text-align:center;width:100px;">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Characteristic)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Appointment)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.DateRelease)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.InvNumber)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th style="text-align:center;width:20px;">
+            @Html.DisplayNameFor(model => model.Units)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Published)
+        </th>
+         <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Checked)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Characteristic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appointment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateRelease)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Units)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Published)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Checked)
+        </td>
+        <td>
+        <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Редагувати запис" 
+               href="/Inventory/Edit/@item.Id">
+               <img src="../../Content/pictures/document-edit.png" class="tdImage" title="Редагувати запис" />
+         </a>
+
+            <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Детально" 
+               href="/Inventory/Details/@item.Id">
+               <img src="../../Content/pictures/info.png" class="tdImage" title="Детально" />
+         </a>
+
+            <a class="openDialog" data-dialog-id="infoDialog" data-dialog-title="Видалити запис" 
+               href="/Inventory/Delete/@item.Id">
+               <img src="../../Content/pictures/delete-icon.png" class="tdImage" title="Видалити запис" />
+         </a>
+           
+            
+        </td>
+    </tr>
+}
+
+</table>
